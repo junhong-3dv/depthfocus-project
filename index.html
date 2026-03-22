@@ -37,29 +37,46 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
+        .cursor-grab { cursor: grab; }
+        .cursor-grabbing { cursor: grabbing !important; }
+        .dot-transition { transition: all 0.3s ease; }
+
+        .mobile-clamp {
+            display: -webkit-box;
+            -webkit-line-clamp: 6;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        @media (min-width: 768px) {
+            .mobile-clamp {
+                -webkit-line-clamp: unset;
+                display: block;
+            }
+        }
     </style>
 </head>
 <body class="antialiased leading-relaxed tracking-wide relative">
 
-    <nav class="fixed top-0 w-full z-50 glass-card px-6 py-4 flex justify-between items-center transition-all duration-300">
-        <div class="font-bold text-lg tracking-tight text-gray-800">DepthFocus</div>
-        <div class="flex gap-4 md:gap-6 text-sm font-semibold text-gray-600">
+    <nav class="fixed top-0 w-full z-50 glass-card px-4 md:px-6 py-3 md:py-4 flex justify-between items-center transition-all duration-300">
+        <div class="font-bold text-base md:text-lg tracking-tight text-gray-800">DepthFocus</div>
+        <div class="flex gap-3 md:gap-6 text-xs md:text-sm font-semibold text-gray-600">
             <a href="#abstract" class="hover:text-indigo-600 transition">Abstract</a>
             <a href="#method" class="hover:text-indigo-600 transition">Method</a>
+            <a href="#dataset" class="hover:text-indigo-600 transition">Dataset</a>
             <a href="#quantitative" class="hover:text-indigo-600 transition">Benchmarks</a>
-            <a href="#qualitative" class="hover:text-indigo-600 transition">Results</a>
+            <a href="#steerable-transitions" class="hover:text-indigo-600 transition">Results</a>
         </div>
     </nav>
 
-    <div class="container mx-auto max-w-5xl px-6 pt-32 pb-24">
+    <div class="container mx-auto max-w-5xl px-4 md:px-6 pt-24 md:pt-32 pb-16 md:pb-24">
 
-        <header class="text-center mb-20">
-            <p class="text-xl font-semibold text-indigo-500 mb-4 tracking-widest uppercase">CVPR 2026</p>
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-8 tracking-tight gradient-text py-2 leading-tight">
+        <header class="text-center mb-12 md:mb-16">
+            <p class="text-lg md:text-xl font-semibold text-indigo-500 mb-3 md:mb-4 tracking-widest uppercase">CVPR 2026</p>
+            <h1 class="text-3xl md:text-6xl font-extrabold mb-6 md:mb-8 tracking-tight gradient-text py-2 leading-tight">
                 DepthFocus: Controllable Depth Estimation <br class="hidden md:block"> for See-Through Scenes
             </h1>
 
-            <div class="text-lg md:text-xl flex flex-wrap justify-center gap-x-6 gap-y-3 mb-2 font-medium text-gray-800">
+            <div class="text-base md:text-xl flex flex-wrap justify-center gap-x-4 md:gap-x-6 gap-y-2 mb-2 font-medium text-gray-800">
                 <span>Junhong Min<sup>1*</sup></span>
                 <span>Jimin Kim<sup>1</sup></span>
                 <span>Cheol-Hui Min<sup>1</sup></span>
@@ -67,20 +84,20 @@
                 <span>Youngpil Jeon<sup>1</sup></span>
                 <span>Minyong Choi<sup>1</sup></span>
             </div>
-            <p class="text-lg text-gray-500 mb-10">
+            <p class="text-base md:text-lg text-gray-500 mb-8 md:mb-10">
                 <sup>1</sup>Samsung Electronics<br>
-                <span class="text-base italic"><sup>*</sup>Corresponding Author</span>
+                <span class="text-sm md:text-base italic"><sup>*</sup>Corresponding Author</span>
             </p>
 
-            <div class="flex justify-center gap-5">
-                <a href="#" class="btn-hover flex items-center gap-2 bg-gray-900 text-white px-8 py-3.5 rounded-full font-semibold text-sm shadow-lg">
+            <div class="flex flex-wrap justify-center gap-3 md:gap-5">
+                <a href="#" class="btn-hover flex items-center justify-center gap-2 bg-gray-900 text-white px-6 md:px-8 py-3 rounded-full font-semibold text-sm shadow-lg w-full md:w-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
                         <path d="M4.5 3.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zM4.5 6.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zM4.5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
                     </svg>
                     Paper
                 </a>
-                <a href="#" class="btn-hover flex items-center gap-2 bg-white text-gray-900 border border-gray-200 px-8 py-3.5 rounded-full font-semibold text-sm shadow-sm">
+                <a href="#" class="btn-hover flex items-center justify-center gap-2 bg-white text-gray-900 border border-gray-200 px-6 md:px-8 py-3 rounded-full font-semibold text-sm shadow-sm w-full md:w-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z"/>
                         <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
@@ -90,135 +107,276 @@
             </div>
         </header>
 
-        <section class="mb-24">
-            <div class="w-full bg-white rounded-3xl mb-6 shadow-lg overflow-hidden border border-gray-100 relative group">
+        <section class="mb-8 md:mb-12">
+            <div class="w-full bg-white rounded-2xl md:rounded-3xl mb-4 md:mb-6 shadow-lg overflow-hidden border border-gray-100">
                 <img src="figures/Thumbnail_final.png" alt="Overview of DepthFocus" class="w-full h-auto object-cover">
             </div>
-            <p class="text-gray-700 text-base md:text-lg px-4 max-w-4xl mx-auto text-justify leading-relaxed">
+            <p class="text-gray-700 text-sm md:text-base px-2 md:px-4 max-w-4xl mx-auto text-justify leading-relaxed">
                 <strong>Overview of DepthFocus.</strong> DepthFocus resolves depth ambiguities in see-through scenes by selectively estimating surfaces aligned with a user-intended focus distance. Unlike passive systems, our steerable architecture modulates internal features as an adaptive opacity filter to resolve layered occlusions. As the intended focus increases, the model actively "peels away" foreground geometry to reconstruct hidden layers, such as transparent partitions and backgrounds. Feature visualizations confirm that the network dynamically reconfigures its computation to perceive only the geometry relevant to the user's intent.
             </p>
         </section>
 
-        <section id="abstract" class="mb-24 relative pt-20 -mt-20">
-            <div class="absolute inset-0 bg-gradient-to-r from-indigo-50 to-purple-50 transform -skew-y-2 z-0 rounded-3xl"></div>
-            <div class="relative z-10 p-10 md:p-14">
-                <h2 class="text-3xl font-extrabold mb-8 text-center text-gray-900">Abstract</h2>
-                <p class="text-gray-700 text-lg leading-loose text-justify">
+        <section id="abstract" class="mb-16 md:mb-24 scroll-mt-24">
+            <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl md:rounded-3xl px-6 py-6 md:px-10 md:py-8 shadow-sm border border-indigo-50">
+                <h2 class="text-2xl md:text-3xl font-extrabold mb-3 md:mb-5 text-center text-gray-900">Abstract</h2>
+                <p id="abstract-text" class="text-gray-700 text-sm md:text-base leading-relaxed text-justify mobile-clamp transition-all duration-300">
                     Depth in the real world is rarely singular. Transmissive materials create layered ambiguities that confound conventional perception systems. Existing models remain passive; conventional approaches typically estimate static depth maps anchored to the nearest surface, and even recent multi-head extensions suffer from a representational bottleneck due to fixed feature representations. This stands in contrast to human vision, which actively shifts focus to perceive a desired depth. We introduce DepthFocus, a steerable Vision Transformer that redefines stereo depth estimation as condition-aware control. Instead of extracting fixed features, our model dynamically modulates its computation based on a physical reference depth, integrating dual conditional mechanisms to selectively perceive geometry aligned with the desired focus. Leveraging a newly curated large-scale synthetic dataset, DepthFocus achieves state-of-the-art results across all evaluated benchmarks, including both standard single-layer and complex multi-layered scenarios. While maintaining high precision in opaque regions, our approach effectively resolves depth ambiguities in transparent and reflective scenes by selectively reconstructing geometry at a target distance. This capability enables robust, intent-driven perception that significantly outperforms existing multi-layer methods, marking a substantial step toward active 3D perception.
                 </p>
+                <div class="text-center mt-2">
+                    <button id="read-more-btn" class="text-indigo-600 font-semibold text-sm md:hidden hover:text-indigo-800" onclick="toggleAbstract()">Read More</button>
+                </div>
             </div>
         </section>
 
-        <section id="method" class="mb-24 pt-20 -mt-20">
-            <h2 class="text-3xl font-extrabold mb-12 text-center text-gray-900">Method</h2>
-            <div class="flex flex-col gap-10 items-center glass-card p-10 rounded-3xl">
-                <div class="w-full bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <section id="method" class="mb-16 md:mb-24 scroll-mt-24">
+            <h2 class="text-2xl md:text-3xl font-extrabold mb-8 md:mb-12 text-center text-gray-900">Method</h2>
+
+            <div class="glass-card p-6 md:p-10 rounded-2xl md:rounded-3xl mb-8 md:mb-12">
+                <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6 text-center">Conditional Depth Estimation Framework</h3>
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify mb-6 md:mb-8">
+                    We formulate a general framework for steerable depth estimation where a scalar conditioning variable <i>c &isin; [0, 1]</i> acts as a proxy for physical distance. The ideal conditional estimator is governed by three core properties:
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                    <div class="bg-white p-5 md:p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <h4 class="font-bold text-indigo-600 mb-2">1. Opaque Determinism</h4>
+                        <p class="text-xs md:text-sm text-gray-600">In non-transmissive opaque regions, the estimated depth remains strictly invariant to changes in the control variable.</p>
+                    </div>
+                    <div class="bg-white p-5 md:p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <h4 class="font-bold text-indigo-600 mb-2">2. Monotonicity</h4>
+                        <p class="text-xs md:text-sm text-gray-600">In transmissive regions, the directional ordering of layers is preserved. An increase in focus never reverts the estimate to a shallower layer.</p>
+                    </div>
+                    <div class="bg-white p-5 md:p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <h4 class="font-bold text-indigo-600 mb-2">3. Reference Proximity</h4>
+                        <p class="text-xs md:text-sm text-gray-600">The model discretely selects a valid surface layer that is optimally positioned relative to the physical reference depth plane.</p>
+                    </div>
+                </div>
+
+                <h4 class="text-lg md:text-xl font-bold text-gray-900 mb-3">Grounding Control as Physical Depth</h4>
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify">
+                    To ensure <i>c</i> acts as a direct proxy for distance, we first convert a physical reference depth <i>Z<sub>ref</sub></i> into disparity <i>d<sub>ref</sub></i> using the stereo camera calibration parameters (focal length <i>f</i> and baseline <i>B</i>):
+                    <br><br>
+                    <span class="block text-center font-mono bg-gray-50 py-2 md:py-3 rounded-lg border border-gray-200 text-sm md:text-base">d<sub>ref</sub> = (f &times; B) / Z<sub>ref</sub></span>
+                    <br>
+                    This reference disparity is then mapped to the normalized control variable <i>c &isin; [0, 1]</i> based on the maximum valid disparity <i>d<sub>max</sub></i> of the scene:
+                    <br><br>
+                    <span class="block text-center font-mono bg-gray-50 py-2 md:py-3 rounded-lg border border-gray-200 text-sm md:text-base">d<sub>ref</sub>(c) = (1 - c) &times; d<sub>max</sub></span>
+                    <br>
+                    By grounding the supervision in the disparity domain while maintaining a depth-based control intent, the network effectively scans through overlapping surfaces in a step-wise manner according to the user's focus.
+                </p>
+            </div>
+
+            <div class="flex flex-col gap-6 md:gap-10 items-center glass-card p-6 md:p-10 rounded-2xl md:rounded-3xl">
+                <div class="w-full bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                     <img src="figures/network_final.png" alt="Network Architecture" class="w-full h-auto object-cover">
                 </div>
                 <div class="w-full">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Condition-Aware Control</h3>
-                    <p class="text-gray-700 text-lg leading-relaxed text-justify mb-4">
-                        Instead of attempting to regress all layers simultaneously from static features, we reformulate depth estimation as a controllable process where the network predicts the surface optimally aligned with a physical reference depth. Our proposed architecture, DepthFocus, is a steerable Vision Transformer equipped with dual conditional modules.
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">Architecture & Feature Modulation</h3>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify mb-4">
+                        We realize the steerable framework through two complementary modulation modules integrated into our Vision Transformer. Instead of re-executing a heavy backbone, we append a conditional fusion stage where pre-computed multi-resolution features are progressively aggregated.
                     </p>
-                    <p class="text-gray-700 text-lg leading-relaxed text-justify">
-                        We realize the steerable framework through two complementary modulation modules: Conditional Routing via Mixture-of-Experts (C-MoE) and Direct Condition Injection (DCI). The C-MoE module employs a router to produce continuous weights to combine expert sub-networks, enabling dynamic feature transformation paths based on a scalar control variable. Concurrently, DCI provides explicit guidance via an attention-based mechanism. These components work together to selectively extract features relevant to the target depth layer.
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify">
+                        The Conditional Mixture-of-Experts (C-MoE) employs a router to produce continuous weights, enabling dynamic feature transformation paths based on the scalar control variable. Concurrently, Direct Condition Injection (DCI) provides explicit guidance via an attention-based mechanism. These components work in parallel to selectively extract features relevant only to the target depth layer.
                     </p>
                 </div>
             </div>
         </section>
 
-        <section id="quantitative" class="mb-24 pt-20 -mt-20">
-            <h2 class="text-3xl font-extrabold mb-12 text-center text-gray-900">Quantitative Results</h2>
-            <div class="flex flex-col md:flex-row gap-10 items-center glass-card p-10 rounded-3xl">
-                <div class="w-full md:w-1/2 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex items-center justify-center p-4">
+        <section id="dataset" class="mb-16 md:mb-24 scroll-mt-24">
+            <h2 class="text-2xl md:text-3xl font-extrabold mb-8 md:mb-12 text-center text-gray-900">Dataset</h2>
+
+            <div class="flex flex-col gap-8 md:gap-12">
+                <div class="glass-card p-6 md:p-8 rounded-2xl md:rounded-3xl flex flex-col">
+                    <div class="w-full bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-4 md:mb-6 flex items-center justify-center">
+                        <img src="figures/syn_dataset.png" alt="Synthetic Dataset" class="w-full h-auto object-cover">
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">Large-scale Synthetic Dataset</h3>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify">
+                        We curated a large-scale synthetic dataset specifically designed for condition-aware depth estimation in see-through scenes. It features diverse transmissive materials such as glass, plastic, and transmissive meshes. Furthermore, the dataset provides comprehensive ground truth including dense disparities for multiple surfaces and precise semantic segmentation labels to train the network's layer-selective capabilities.
+                    </p>
+                </div>
+
+                <div class="glass-card p-6 md:p-8 rounded-2xl md:rounded-3xl flex flex-col">
+                    <div class="w-full bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-4 md:mb-6 flex items-center justify-center">
+                        <img src="figures/real_dataset.png" alt="Real Dataset" class="w-full h-auto object-cover">
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">Real-world Benchmark Dataset</h3>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify">
+                        To evaluate real-world generalization, we captured a high-quality real stereo dataset in a controlled laboratory environment. This benchmark features complex bi-layer configurations using acrylic plates with two distinct levels of transmissivity (60% and 80%). Crucially, it provides high-precision dense depth annotations for both layers, serving as a rigorous benchmark to assess the model's robustness and steerability against real physical noise and light interactions.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="quantitative" class="mb-16 md:mb-24 scroll-mt-24">
+            <h2 class="text-2xl md:text-3xl font-extrabold mb-8 md:mb-12 text-center text-gray-900">Comprehensive Benchmark Evaluation</h2>
+            <div class="flex flex-col md:flex-row gap-6 md:gap-10 items-center glass-card p-6 md:p-10 rounded-2xl md:rounded-3xl">
+                <div class="w-full md:w-1/2 bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex items-center justify-center p-2 md:p-4">
                     <img src="figures/benchmark_radar.png" alt="Benchmark Radar Chart" class="max-w-full h-auto object-contain">
                 </div>
                 <div class="w-full md:w-1/2">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Comprehensive Benchmark Performance</h3>
-                    <p class="text-gray-700 text-lg leading-relaxed text-justify mb-4">
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">Performance Comparison</h3>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify mb-4">
                         DepthFocus outperforms top-tier single-layer models on the first visible surface across all evaluated benchmarks. As visualized in the radar plot, our model achieves leading accuracy on standard opaque datasets (e.g., Middlebury) while demonstrating significant improvements in transparent and reflective scenes (e.g., Booster, LayeredFlow).
                     </p>
-                    <p class="text-gray-700 text-lg leading-relaxed text-justify">
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify">
                         Crucially, in complex multi-layered scenarios, DepthFocus surpasses existing metric-scale multi-layer methods by a substantial margin, highlighting its robustness and generalization capabilities in unconstrained environments.
                     </p>
                 </div>
             </div>
         </section>
 
-        <section id="qualitative" class="mb-24 pt-20 -mt-20">
-            <h2 class="text-3xl font-extrabold mb-4 text-center text-gray-900">Qualitative Results</h2>
-            <p class="text-center text-gray-500 mb-10">Swipe horizontally to view depth and PCA feature transitions across 10 scenes.</p>
+        <section id="steerable-transitions" class="mb-16 md:mb-24 scroll-mt-24">
+            <h2 class="text-2xl md:text-3xl font-extrabold mb-4 text-center text-gray-900">Steerable & Continuous Depth Transitions</h2>
+            <p class="text-center text-gray-700 max-w-3xl mx-auto mb-2 text-base md:text-lg px-2">
+                This section visualizes the continuous depth transitions and feature modulations generated by our steerable architecture in see-through scenes. The results demonstrate how the network actively resolves layered ambiguities according to the intended focus.
+            </p>
+            <p class="text-center text-gray-500 mb-6 md:mb-10 text-xs md:text-sm">
+                Swipe, drag, or click the dots below to explore the transitions across 10 different scenes.
+            </p>
 
-            <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 hide-scrollbar px-4" style="scroll-padding: 1rem;">
+            <div class="slider-container flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-6 pb-4 hide-scrollbar px-2 md:px-4 cursor-grab" style="scroll-padding: 1rem;">
 
-                <div class="snap-center shrink-0 w-[90%] md:w-[70%] lg:w-[60%] glass-card p-5 rounded-3xl flex flex-col">
-                    <div class="mb-6 overflow-hidden rounded-xl border border-gray-100 shadow-sm bg-black aspect-video">
-                        <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                            <source src="videos/scene_01.mp4" type="video/mp4">
+                <div class="slide-item snap-center shrink-0 w-[92%] md:w-[70%] lg:w-[60%] glass-card p-4 md:p-5 rounded-2xl md:rounded-3xl flex flex-col pointer-events-none">
+                    <div class="mb-4 md:mb-6 overflow-hidden rounded-lg md:rounded-xl border border-gray-100 shadow-sm bg-black flex justify-center items-center">
+                        <video autoplay loop muted playsinline class="w-full h-auto object-contain rounded-lg md:rounded-xl pointer-events-auto">
+                            <source src="videos/sample1.mp4" type="video/mp4">
                         </video>
                     </div>
-                    <div class="mt-auto text-center px-4 pb-2">
-                        <h4 class="text-xl text-gray-900 font-bold mb-2">Scene 01</h4>
-                        <p class="text-sm text-gray-600">Dynamic transitions of estimated disparity and PCA features conditioned on varying focus distances.</p>
+                    <div class="mt-auto text-center px-2 md:px-4 pb-2">
+                        <h4 class="text-lg md:text-xl text-gray-900 font-bold mb-1 md:mb-2">Scene 01</h4>
+                        <p class="text-xs md:text-sm text-gray-600">Demonstrating continuous and steerable depth transitions on our custom dataset.</p>
                     </div>
                 </div>
 
-                <div class="snap-center shrink-0 w-[90%] md:w-[70%] lg:w-[60%] glass-card p-5 rounded-3xl flex flex-col">
-                    <div class="mb-6 overflow-hidden rounded-xl border border-gray-100 shadow-sm bg-black aspect-video">
-                        <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                            <source src="videos/scene_02.mp4" type="video/mp4">
+                <div class="slide-item snap-center shrink-0 w-[92%] md:w-[70%] lg:w-[60%] glass-card p-4 md:p-5 rounded-2xl md:rounded-3xl flex flex-col pointer-events-none">
+                    <div class="mb-4 md:mb-6 overflow-hidden rounded-lg md:rounded-xl border border-gray-100 shadow-sm bg-black flex justify-center items-center">
+                        <video autoplay loop muted playsinline class="w-full h-auto object-contain rounded-lg md:rounded-xl pointer-events-auto">
+                            <source src="videos/sample2.mp4" type="video/mp4">
                         </video>
                     </div>
-                    <div class="mt-auto text-center px-4 pb-2">
-                        <h4 class="text-xl text-gray-900 font-bold mb-2">Scene 02</h4>
-                        <p class="text-sm text-gray-600">Dynamic transitions of estimated disparity and PCA features conditioned on varying focus distances.</p>
+                    <div class="mt-auto text-center px-2 md:px-4 pb-2">
+                        <h4 class="text-lg md:text-xl text-gray-900 font-bold mb-1 md:mb-2">Scene 02</h4>
+                        <p class="text-xs md:text-sm text-gray-600">Demonstrating continuous and steerable depth transitions on our custom dataset.</p>
                     </div>
                 </div>
 
-                <div class="snap-center shrink-0 w-[90%] md:w-[70%] lg:w-[60%] glass-card p-5 rounded-3xl flex flex-col">
-                    <div class="mb-6 overflow-hidden rounded-xl border border-gray-100 shadow-sm bg-black aspect-video">
-                        <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                            <source src="videos/scene_03.mp4" type="video/mp4">
+                <div class="slide-item snap-center shrink-0 w-[92%] md:w-[70%] lg:w-[60%] glass-card p-4 md:p-5 rounded-2xl md:rounded-3xl flex flex-col pointer-events-none">
+                    <div class="mb-4 md:mb-6 overflow-hidden rounded-lg md:rounded-xl border border-gray-100 shadow-sm bg-black flex justify-center items-center">
+                        <video autoplay loop muted playsinline class="w-full h-auto object-contain rounded-lg md:rounded-xl pointer-events-auto">
+                            <source src="videos/sample3.mp4" type="video/mp4">
                         </video>
                     </div>
-                    <div class="mt-auto text-center px-4 pb-2">
-                        <h4 class="text-xl text-gray-900 font-bold mb-2">Scene 03</h4>
-                        <p class="text-sm text-gray-600">Dynamic transitions of estimated disparity and PCA features conditioned on varying focus distances.</p>
+                    <div class="mt-auto text-center px-2 md:px-4 pb-2">
+                        <h4 class="text-lg md:text-xl text-gray-900 font-bold mb-1 md:mb-2">Scene 03</h4>
+                        <p class="text-xs md:text-sm text-gray-600">Demonstrating continuous and steerable depth transitions on the Booster dataset.</p>
                     </div>
                 </div>
 
-                <div class="snap-center shrink-0 w-[90%] md:w-[70%] lg:w-[60%] glass-card p-5 rounded-3xl flex flex-col">
-                    <div class="mb-6 overflow-hidden rounded-xl border border-gray-100 shadow-sm bg-black aspect-video">
-                        <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                            <source src="videos/scene_04.mp4" type="video/mp4">
+                <div class="slide-item snap-center shrink-0 w-[92%] md:w-[70%] lg:w-[60%] glass-card p-4 md:p-5 rounded-2xl md:rounded-3xl flex flex-col pointer-events-none">
+                    <div class="mb-4 md:mb-6 overflow-hidden rounded-lg md:rounded-xl border border-gray-100 shadow-sm bg-black flex justify-center items-center">
+                        <video autoplay loop muted playsinline class="w-full h-auto object-contain rounded-lg md:rounded-xl pointer-events-auto">
+                            <source src="videos/sample4.mp4" type="video/mp4">
                         </video>
                     </div>
-                    <div class="mt-auto text-center px-4 pb-2">
-                        <h4 class="text-xl text-gray-900 font-bold mb-2">Scene 04</h4>
-                        <p class="text-sm text-gray-600">Dynamic transitions of estimated disparity and PCA features conditioned on varying focus distances.</p>
+                    <div class="mt-auto text-center px-2 md:px-4 pb-2">
+                        <h4 class="text-lg md:text-xl text-gray-900 font-bold mb-1 md:mb-2">Scene 04</h4>
+                        <p class="text-xs md:text-sm text-gray-600">Demonstrating continuous and steerable depth transitions on the Booster dataset.</p>
                     </div>
                 </div>
 
-                <div class="snap-center shrink-0 w-[90%] md:w-[70%] lg:w-[60%] glass-card p-5 rounded-3xl flex flex-col">
-                    <div class="mb-6 overflow-hidden rounded-xl border border-gray-100 shadow-sm bg-black aspect-video">
-                        <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                            <source src="videos/scene_05.mp4" type="video/mp4">
+                <div class="slide-item snap-center shrink-0 w-[92%] md:w-[70%] lg:w-[60%] glass-card p-4 md:p-5 rounded-2xl md:rounded-3xl flex flex-col pointer-events-none">
+                    <div class="mb-4 md:mb-6 overflow-hidden rounded-lg md:rounded-xl border border-gray-100 shadow-sm bg-black flex justify-center items-center">
+                        <video autoplay loop muted playsinline class="w-full h-auto object-contain rounded-lg md:rounded-xl pointer-events-auto">
+                            <source src="videos/sample5.mp4" type="video/mp4">
                         </video>
                     </div>
-                    <div class="mt-auto text-center px-4 pb-2">
-                        <h4 class="text-xl text-gray-900 font-bold mb-2">Scene 05</h4>
-                        <p class="text-sm text-gray-600">Dynamic transitions of estimated disparity and PCA features conditioned on varying focus distances.</p>
+                    <div class="mt-auto text-center px-2 md:px-4 pb-2">
+                        <h4 class="text-lg md:text-xl text-gray-900 font-bold mb-1 md:mb-2">Scene 05</h4>
+                        <p class="text-xs md:text-sm text-gray-600">Demonstrating continuous and steerable depth transitions on our custom dataset.</p>
+                    </div>
+                </div>
+
+                <div class="slide-item snap-center shrink-0 w-[92%] md:w-[70%] lg:w-[60%] glass-card p-4 md:p-5 rounded-2xl md:rounded-3xl flex flex-col pointer-events-none">
+                    <div class="mb-4 md:mb-6 overflow-hidden rounded-lg md:rounded-xl border border-gray-100 shadow-sm bg-black flex justify-center items-center">
+                        <video autoplay loop muted playsinline class="w-full h-auto object-contain rounded-lg md:rounded-xl pointer-events-auto">
+                            <source src="videos/sample6.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="mt-auto text-center px-2 md:px-4 pb-2">
+                        <h4 class="text-lg md:text-xl text-gray-900 font-bold mb-1 md:mb-2">Scene 06</h4>
+                        <p class="text-xs md:text-sm text-gray-600">Demonstrating continuous and steerable depth transitions on our custom dataset.</p>
+                    </div>
+                </div>
+
+                <div class="slide-item snap-center shrink-0 w-[92%] md:w-[70%] lg:w-[60%] glass-card p-4 md:p-5 rounded-2xl md:rounded-3xl flex flex-col pointer-events-none">
+                    <div class="mb-4 md:mb-6 overflow-hidden rounded-lg md:rounded-xl border border-gray-100 shadow-sm bg-black flex justify-center items-center">
+                        <video autoplay loop muted playsinline class="w-full h-auto object-contain rounded-lg md:rounded-xl pointer-events-auto">
+                            <source src="videos/sample7.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="mt-auto text-center px-2 md:px-4 pb-2">
+                        <h4 class="text-lg md:text-xl text-gray-900 font-bold mb-1 md:mb-2">Scene 07</h4>
+                        <p class="text-xs md:text-sm text-gray-600">Demonstrating continuous and steerable depth transitions on our custom dataset.</p>
+                    </div>
+                </div>
+
+                <div class="slide-item snap-center shrink-0 w-[92%] md:w-[70%] lg:w-[60%] glass-card p-4 md:p-5 rounded-2xl md:rounded-3xl flex flex-col pointer-events-none">
+                    <div class="mb-4 md:mb-6 overflow-hidden rounded-lg md:rounded-xl border border-gray-100 shadow-sm bg-black flex justify-center items-center">
+                        <video autoplay loop muted playsinline class="w-full h-auto object-contain rounded-lg md:rounded-xl pointer-events-auto">
+                            <source src="videos/sample8.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="mt-auto text-center px-2 md:px-4 pb-2">
+                        <h4 class="text-lg md:text-xl text-gray-900 font-bold mb-1 md:mb-2">Scene 08</h4>
+                        <p class="text-xs md:text-sm text-gray-600">Demonstrating continuous and steerable depth transitions on our custom dataset.</p>
+                    </div>
+                </div>
+
+                <div class="slide-item snap-center shrink-0 w-[92%] md:w-[70%] lg:w-[60%] glass-card p-4 md:p-5 rounded-2xl md:rounded-3xl flex flex-col pointer-events-none">
+                    <div class="mb-4 md:mb-6 overflow-hidden rounded-lg md:rounded-xl border border-gray-100 shadow-sm bg-black flex justify-center items-center">
+                        <video autoplay loop muted playsinline class="w-full h-auto object-contain rounded-lg md:rounded-xl pointer-events-auto">
+                            <source src="videos/sample9.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="mt-auto text-center px-2 md:px-4 pb-2">
+                        <h4 class="text-lg md:text-xl text-gray-900 font-bold mb-1 md:mb-2">Scene 09</h4>
+                        <p class="text-xs md:text-sm text-gray-600">Demonstrating continuous and steerable depth transitions on the LayeredFlow dataset.</p>
+                    </div>
+                </div>
+
+                <div class="slide-item snap-center shrink-0 w-[92%] md:w-[70%] lg:w-[60%] glass-card p-4 md:p-5 rounded-2xl md:rounded-3xl flex flex-col pointer-events-none">
+                    <div class="mb-4 md:mb-6 overflow-hidden rounded-lg md:rounded-xl border border-gray-100 shadow-sm bg-black flex justify-center items-center">
+                        <video autoplay loop muted playsinline class="w-full h-auto object-contain rounded-lg md:rounded-xl pointer-events-auto">
+                            <source src="videos/sample10.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="mt-auto text-center px-2 md:px-4 pb-2">
+                        <h4 class="text-lg md:text-xl text-gray-900 font-bold mb-1 md:mb-2">Scene 10</h4>
+                        <p class="text-xs md:text-sm text-gray-600">Demonstrating continuous and steerable depth transitions on the LayeredFlow dataset.</p>
                     </div>
                 </div>
 
             </div>
+
+            <div class="flex justify-center items-center gap-1.5 md:gap-2 mt-2 md:mt-4" id="slider-dots">
+                <button class="w-5 md:w-6 h-2 md:h-2.5 rounded-full bg-indigo-600 dot-transition" aria-label="Go to slide 1"></button>
+                <button class="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-gray-300 dot-transition hover:bg-indigo-400" aria-label="Go to slide 2"></button>
+                <button class="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-gray-300 dot-transition hover:bg-indigo-400" aria-label="Go to slide 3"></button>
+                <button class="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-gray-300 dot-transition hover:bg-indigo-400" aria-label="Go to slide 4"></button>
+                <button class="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-gray-300 dot-transition hover:bg-indigo-400" aria-label="Go to slide 5"></button>
+                <button class="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-gray-300 dot-transition hover:bg-indigo-400" aria-label="Go to slide 6"></button>
+                <button class="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-gray-300 dot-transition hover:bg-indigo-400" aria-label="Go to slide 7"></button>
+                <button class="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-gray-300 dot-transition hover:bg-indigo-400" aria-label="Go to slide 8"></button>
+                <button class="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-gray-300 dot-transition hover:bg-indigo-400" aria-label="Go to slide 9"></button>
+                <button class="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-gray-300 dot-transition hover:bg-indigo-400" aria-label="Go to slide 10"></button>
+            </div>
         </section>
 
         <section class="mb-12">
-            <h2 class="text-2xl font-bold mb-6 text-gray-900">Citation</h2>
-            <div class="bg-gray-900 p-8 rounded-2xl shadow-xl relative group">
-                <button onclick="copyBib()" id="copyBtn" class="absolute top-4 right-4 bg-gray-700 hover:bg-gray-600 text-white text-xs px-3 py-1.5 rounded transition opacity-0 group-hover:opacity-100 focus:opacity-100">Copy</button>
-                <pre><code id="bibText" class="text-sm md:text-base text-gray-300 font-mono leading-relaxed overflow-x-auto block">@inproceedings{min2026depthfocus,
+            <h2 class="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-gray-900">Citation</h2>
+            <div class="bg-gray-900 p-6 md:p-8 rounded-2xl shadow-xl relative group">
+                <button onclick="copyBib()" id="copyBtn" class="absolute top-4 right-4 bg-gray-700 hover:bg-gray-600 text-white text-xs px-3 py-1.5 rounded transition opacity-100 md:opacity-0 md:group-hover:opacity-100 focus:opacity-100">Copy</button>
+                <pre><code id="bibText" class="text-xs md:text-sm text-gray-300 font-mono leading-relaxed overflow-x-auto block">@inproceedings{min2026depthfocus,
   title={DepthFocus: Controllable Depth Estimation for See-Through Scenes},
   author={Min, Junhong and Kim, Jimin and Min, Cheol-Hui and Kim, Minwook and Jeon, Youngpil and Choi, Minyong},
   booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
@@ -230,6 +388,18 @@
     </div>
 
     <script>
+        function toggleAbstract() {
+            const text = document.getElementById('abstract-text');
+            const btn = document.getElementById('read-more-btn');
+            if (text.classList.contains('mobile-clamp')) {
+                text.classList.remove('mobile-clamp');
+                btn.innerText = 'Show Less';
+            } else {
+                text.classList.add('mobile-clamp');
+                btn.innerText = 'Read More';
+            }
+        }
+
         function copyBib() {
             const text = document.getElementById('bibText').innerText;
             navigator.clipboard.writeText(text).then(() => {
@@ -238,6 +408,80 @@
                 setTimeout(() => btn.innerText = 'Copy', 2000);
             });
         }
+
+        const slider = document.querySelector('.slider-container');
+        const slides = document.querySelectorAll('.slide-item');
+        const dots = document.querySelectorAll('#slider-dots button');
+
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.classList.add('cursor-grabbing');
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+            slider.style.scrollSnapType = 'none';
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.classList.remove('cursor-grabbing');
+            slider.style.scrollSnapType = 'x mandatory';
+        });
+
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.classList.remove('cursor-grabbing');
+            slider.style.scrollSnapType = 'x mandatory';
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 1.5;
+            slider.scrollLeft = scrollLeft - walk;
+        });
+
+        slider.addEventListener('scroll', () => {
+            const scrollCenter = slider.scrollLeft + slider.clientWidth / 2;
+            let activeIndex = 0;
+            let minDistance = Infinity;
+
+            slides.forEach((slide, index) => {
+                const slideCenter = slide.offsetLeft + slide.clientWidth / 2 - slider.offsetLeft;
+                const distance = Math.abs(scrollCenter - slideCenter);
+
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    activeIndex = index;
+                }
+            });
+
+            dots.forEach((dot, index) => {
+                if (index === activeIndex) {
+                    dot.classList.remove('w-2', 'md:w-2.5', 'bg-gray-300');
+                    dot.classList.add('w-5', 'md:w-6', 'bg-indigo-600');
+                } else {
+                    dot.classList.remove('w-5', 'md:w-6', 'bg-indigo-600');
+                    dot.classList.add('w-2', 'md:w-2.5', 'bg-gray-300');
+                }
+            });
+        });
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                const slide = slides[index];
+                const scrollPos = slide.offsetLeft - slider.offsetLeft - (slider.clientWidth - slide.clientWidth) / 2;
+
+                slider.scrollTo({
+                    left: scrollPos,
+                    behavior: 'smooth'
+                });
+            });
+        });
     </script>
 </body>
 </html>
