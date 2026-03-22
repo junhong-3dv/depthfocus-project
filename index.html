@@ -179,6 +179,21 @@
                     </p>
                 </div>
             </div>
+
+            <div class="glass-card p-6 md:p-10 rounded-2xl md:rounded-3xl mt-8 md:mt-12">
+                <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6 text-center">Directional Surface Selection Criterion</h3>
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify mb-4">
+                    To realize the "peeling" effect of foreground geometry, the model must select a valid surface based on a directional proximity criterion. When multiple transmissive layers overlap, the network does not simply choose the absolute closest surface in distance. Instead, it estimates the actual surface disparity <i>d<sup>*</sup></i> that is closest to the reference disparity <i>d<sub>ref</sub></i> while strictly positioned physically behind it.
+                </p>
+                <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-gray-100 flex justify-center items-center my-6">
+                    <span class="font-mono text-base md:text-xl text-gray-800">
+                        d<sup>*</sup> = argmin<sub>d &isin; S, d &le; d<sub>ref</sub></sub> (d<sub>ref</sub> - d)
+                    </span>
+                </div>
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify">
+                    Here, <i>S</i> represents the set of all valid surface disparities in the scene. By enforcing the condition <i>d &le; d<sub>ref</sub></i> (which translates to physical depth <i>Z &ge; Z<sub>ref</sub></i>), the model guarantees monotonic depth transitions. This mathematical constraint ensures that as the intended focus distance increases, the estimated depth stably progresses toward the background without regressing to shallower layers.
+                </p>
+            </div>
         </section>
 
         <section id="dataset" class="mb-16 md:mb-24 scroll-mt-24">
@@ -216,10 +231,10 @@
                 <div class="w-full md:w-1/2">
                     <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">Performance Comparison</h3>
                     <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify mb-4">
-                        DepthFocus outperforms top-tier single-layer models on the first visible surface across all evaluated benchmarks. As visualized in the radar plot, our model achieves leading accuracy on standard opaque datasets (e.g., Middlebury) while demonstrating significant improvements in transparent and reflective scenes (e.g., Booster, LayeredFlow).
+                        We evaluate DepthFocus using a standard single-layer benchmark protocol, measuring accuracy strictly on the first visible surface. While our model achieves leading performance on standard opaque datasets like Middlebury, its architectural advantages are most evident in see-through scenes.
                     </p>
                     <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify">
-                        Crucially, in complex multi-layered scenarios, DepthFocus surpasses existing metric-scale multi-layer methods by a substantial margin, highlighting its robustness and generalization capabilities in unconstrained environments.
+                        Crucially, the performance margin over existing top-tier models becomes remarkably large in complex multi-layered environments. On datasets featuring severe depth ambiguities, namely Booster, LayeredFlow, and our custom dataset (Ours), DepthFocus demonstrates a substantial lead. This confirms the robustness of our condition-aware control in resolving transmissive layered geometry.
                     </p>
                 </div>
             </div>
