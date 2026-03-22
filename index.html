@@ -200,7 +200,9 @@
             <div class="flex flex-col gap-8 md:gap-12">
                 <div class="glass-card p-6 md:p-8 rounded-2xl md:rounded-3xl flex flex-col">
                     <div class="w-full bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-4 md:mb-6 flex items-center justify-center">
-                        <img src="figures/syn_dataset.png" alt="Synthetic Dataset" class="w-full h-auto object-cover">
+                        <video autoplay loop muted playsinline controls class="w-full h-auto object-cover rounded-xl pointer-events-auto">
+                            <source src="/videos/syn_dataset_overview.mp4" type="video/mp4">
+                        </video>
                     </div>
                     <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">Large-scale Synthetic Dataset</h3>
                     <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify">
@@ -382,6 +384,22 @@
                 <button class="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-gray-300 dot-transition hover:bg-indigo-400" aria-label="Go to slide 8"></button>
                 <button class="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-gray-300 dot-transition hover:bg-indigo-400" aria-label="Go to slide 9"></button>
                 <button class="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-gray-300 dot-transition hover:bg-indigo-400" aria-label="Go to slide 10"></button>
+            </div>
+
+            <div class="mt-12 md:mt-16 glass-card p-6 md:p-10 rounded-2xl md:rounded-3xl">
+                <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-6 md:mb-8 text-center">Quantitative Transition Analysis</h3>
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify mb-8 md:mb-10 mx-auto max-w-4xl">
+                    To quantitatively verify the steerability of DepthFocus, we plot estimated depth against input reference depth for three specific points in two distinct see-through scenes. The plots clearly demonstrate the intended monotonic transitions. For all points, as the focus is swept from near to far, the estimated depth stably moves to a deeper surface upon passing its physical distance, resolving layered ambiguities.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start citation-images">
+                    <div class="bg-white p-2 rounded-xl shadow-sm border border-gray-100 overflow-hidden citation-image-container">
+                        <img src="Generalization_supp_1.jpg" alt="Quantitative Transition Plot Scene 1" class="w-full h-auto object-contain citation-image">
+                    </div>
+                    <div class="bg-white p-2 rounded-xl shadow-sm border border-gray-100 overflow-hidden citation-image-container">
+                        <img src="Generalization_supp_2.jpg" alt="Quantitative Transition Plot Scene 2" class="w-full h-auto object-contain citation-image">
+                    </div>
+                </div>
             </div>
         </section>
 
