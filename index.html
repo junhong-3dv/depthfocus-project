@@ -163,6 +163,19 @@
                     <br>
                     By grounding the supervision in the disparity domain while maintaining a depth-based control intent, the network effectively scans through overlapping surfaces in a step-wise manner according to the user's focus.
                 </p>
+
+                <h4 class="text-lg md:text-xl font-bold text-gray-900 mb-3 mt-8 md:mt-10">Reference-Driven Ground Truth Assignment</h4>
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify mb-4">
+                    To realize the active "peeling" effect of foreground geometry, the model assigns the ground truth by selecting a valid surface based on a directional proximity criterion. When multiple transmissive layers overlap, the network estimates the actual surface disparity <i>d<sup>*</sup></i> that is closest to the reference disparity <i>d<sub>ref</sub></i> while being strictly positioned physically behind it.
+                </p>
+                <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-gray-100 flex justify-center items-center my-6">
+                    <span class="font-mono text-base md:text-xl text-gray-800">
+                        d<sup>*</sup> = argmin<sub>d &isin; S, d &le; d<sub>ref</sub></sub> (d<sub>ref</sub> - d)
+                    </span>
+                </div>
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify">
+                    Here, <i>S</i> represents the set of all valid surface disparities in the scene. By enforcing the condition <i>d &le; d<sub>ref</sub></i> (which translates to physical depth <i>Z &ge; Z<sub>ref</sub></i>), the assignment guarantees monotonic depth transitions as the focus distance increases without regressing to shallower layers.
+                </p>
             </div>
 
             <div class="flex flex-col gap-6 md:gap-10 items-center glass-card p-6 md:p-10 rounded-2xl md:rounded-3xl">
@@ -178,21 +191,6 @@
                         The Conditional Mixture-of-Experts (C-MoE) employs a router to produce continuous weights, enabling dynamic feature transformation paths based on the scalar control variable. Concurrently, Direct Condition Injection (DCI) provides explicit guidance via an attention-based mechanism. These components work in parallel to selectively extract features relevant only to the target depth layer.
                     </p>
                 </div>
-            </div>
-
-            <div class="glass-card p-6 md:p-10 rounded-2xl md:rounded-3xl mt-8 md:mt-12">
-                <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6 text-center">Directional Surface Selection Criterion</h3>
-                <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify mb-4">
-                    To realize the "peeling" effect of foreground geometry, the model must select a valid surface based on a directional proximity criterion. When multiple transmissive layers overlap, the network does not simply choose the absolute closest surface in distance. Instead, it estimates the actual surface disparity <i>d<sup>*</sup></i> that is closest to the reference disparity <i>d<sub>ref</sub></i> while strictly positioned physically behind it.
-                </p>
-                <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-gray-100 flex justify-center items-center my-6">
-                    <span class="font-mono text-base md:text-xl text-gray-800">
-                        d<sup>*</sup> = argmin<sub>d &isin; S, d &le; d<sub>ref</sub></sub> (d<sub>ref</sub> - d)
-                    </span>
-                </div>
-                <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify">
-                    Here, <i>S</i> represents the set of all valid surface disparities in the scene. By enforcing the condition <i>d &le; d<sub>ref</sub></i> (which translates to physical depth <i>Z &ge; Z<sub>ref</sub></i>), the model guarantees monotonic depth transitions. This mathematical constraint ensures that as the intended focus distance increases, the estimated depth stably progresses toward the background without regressing to shallower layers.
-                </p>
             </div>
         </section>
 
