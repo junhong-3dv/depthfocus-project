@@ -57,14 +57,21 @@
 </head>
 <body class="antialiased leading-relaxed tracking-wide relative">
 
-    <nav class="fixed top-0 w-full z-50 glass-card px-4 md:px-6 py-3 md:py-4 flex justify-between items-center transition-all duration-300">
+    <nav class="fixed top-0 w-full z-50 glass-card px-4 md:px-6 py-3 md:py-4 flex justify-between items-center transition-all duration-300 relative">
         <div class="font-bold text-base md:text-lg tracking-tight text-gray-800">DepthFocus</div>
-        <div class="flex gap-3 md:gap-6 text-xs md:text-sm font-semibold text-gray-600">
-            <a href="#abstract" class="hover:text-indigo-600 transition">Abstract</a>
-            <a href="#method" class="hover:text-indigo-600 transition">Method</a>
-            <a href="#dataset" class="hover:text-indigo-600 transition">Dataset</a>
-            <a href="#quantitative" class="hover:text-indigo-600 transition">Benchmarks</a>
-            <a href="#steerable-transitions" class="hover:text-indigo-600 transition">Results</a>
+
+        <button onclick="toggleMobileMenu()" class="md:hidden text-gray-600 hover:text-indigo-600 focus:outline-none transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+
+        <div id="nav-menu" class="hidden absolute top-full right-4 mt-2 w-48 p-5 glass-card rounded-2xl flex-col gap-4 shadow-xl md:static md:flex md:w-auto md:p-0 md:bg-transparent md:border-none md:shadow-none md:flex-row md:gap-6 text-sm font-semibold text-gray-600 md:mt-0 transition-all z-50">
+            <a href="#abstract" class="hover:text-indigo-600 transition text-right md:text-left" onclick="closeMobileMenu()">Abstract</a>
+            <a href="#method" class="hover:text-indigo-600 transition text-right md:text-left" onclick="closeMobileMenu()">Method</a>
+            <a href="#dataset" class="hover:text-indigo-600 transition text-right md:text-left" onclick="closeMobileMenu()">Dataset</a>
+            <a href="#quantitative" class="hover:text-indigo-600 transition text-right md:text-left" onclick="closeMobileMenu()">Benchmarks</a>
+            <a href="#steerable-transitions" class="hover:text-indigo-600 transition text-right md:text-left" onclick="closeMobileMenu()">Results</a>
         </div>
     </nav>
 
@@ -79,8 +86,8 @@
             <div class="text-base md:text-xl flex flex-wrap justify-center gap-x-4 md:gap-x-6 gap-y-2 mb-2 font-medium text-gray-800">
                 <span>Junhong Min<sup>1*</sup></span>
                 <span>Jimin Kim<sup>1</sup></span>
-                <span>Cheol-Hui Min<sup>1</sup></span>
                 <span>Minwook Kim<sup>1</sup></span>
+                <span>Cheol-Hui Min<sup>1</sup></span>
                 <span>Youngpil Jeon<sup>1</sup></span>
                 <span>Minyong Choi<sup>1</sup></span>
             </div>
@@ -406,6 +413,20 @@
     </div>
 
     <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
+
+        function closeMobileMenu() {
+            if (window.innerWidth < 768) {
+                const menu = document.getElementById('nav-menu');
+                menu.classList.add('hidden');
+                menu.classList.remove('flex');
+            }
+        }
+
         function toggleAbstract() {
             const text = document.getElementById('abstract-text');
             const btn = document.getElementById('read-more-btn');
